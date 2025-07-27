@@ -3,8 +3,58 @@
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    /* Rolagem suave para âncoras */
 }
+
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    animation: fadeOutSplash 4.5s forwards;
+}
+
+#splash-screen h1 {
+    font-size: 4vw;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    opacity: 0;
+    animation: scaleText 3s forwards;
+}
+
+@keyframes scaleText {
+    from {
+        opacity: 0;
+        transform: scale(4);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOutSplash {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+    80% {
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 
 :root {
     --cor-primaria: #990000;
@@ -21,6 +71,7 @@ body {
     line-height: 1.6;
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
+    padding-top: 60px; /* Espaço para o header fixo */
 }
 
 h1,
@@ -59,9 +110,10 @@ a:hover {
     text-decoration: underline;
 }
 
+/* --- Layout Principal --- */
 .container {
     max-width: 1200px;
-    margin: 2rem auto;
+    margin: 2rem auto; /* Margem ajustada */
     padding: 0 1rem;
     display: flex;
     gap: 2rem;
@@ -75,41 +127,37 @@ aside {
     flex: 1;
 }
 
+/* --- Cabeçalho e Navegação --- */
 header {
-    background-color: var(--cor-secundaria);
-    color: var(--cor-branco);
-    text-align: center;
-    padding: 2rem 1rem;
-}
-
-header h1 {
-    color: var(--cor-branco);
-}
-
-nav {
     background-color: var(--cor-primaria);
-    padding: 0.5rem 0;
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 100;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
+    padding: 1rem 0;
     gap: 2rem;
 }
 
 nav a {
     color: var(--cor-branco);
     font-weight: bold;
+    padding: 0.5rem;
 }
 
 nav a:hover {
     color: var(--cor-dourada);
+    text-decoration: none;
 }
 
+/* --- Estilo dos Cards --- */
 section {
     background: var(--cor-branco);
     padding: 2rem;
@@ -118,6 +166,29 @@ section {
     box-shadow: var(--sombra-padrao);
 }
 
+/* Card de Apresentação (Hero) */
+.hero-card {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.hero-card .profile-pic {
+    width: 150px;
+    height: 150px;
+}
+
+.hero-text h1 {
+    margin-bottom: 0.5rem;
+}
+
+.hero-text p {
+    font-size: 1.1rem;
+    color: var(--cor-texto);
+    margin: 0;
+}
+
+/* Outros Cards */
 #sobre {
     border-left: 5px solid var(--cor-dourada);
 }
@@ -173,10 +244,7 @@ section {
     text-decoration: none;
 }
 
-
 .profile-pic {
-    width: 200px;
-    height: 200px;
     border-radius: 50%;
     border: 5px solid var(--cor-dourada);
     object-fit: cover;
@@ -190,6 +258,7 @@ section {
     margin-bottom: 0.5rem;
 }
 
+/* --- Rodapé --- */
 footer {
     text-align: center;
     padding: 2rem;
@@ -205,19 +274,34 @@ footer a:hover {
     color: var(--cor-branco);
 }
 
+/* --- Responsividade --- */
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
+    body {
+        padding-top: 0;
     }
 
-    h1 {
-        font-size: 2rem;
+    header {
+        position: static;
     }
 
     nav ul {
         flex-direction: column;
         align-items: center;
-        gap: 1rem;
-        padding: 0.5rem 0;
+        gap: 0.5rem;
+        padding: 1rem 0;
+    }
+    
+    .container {
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+
+    .hero-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2rem;
     }
 }
